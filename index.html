@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karaatay İnşaat — Güçlü Temeller, Kalıcı Yapılar</title>
+  <meta name="description" content="Karaatay İnşaat, 20 yılı aşkın deneyimle Bursa ve çevresinde konut, ticari ve endüstriyel yapı projelerini anahtar teslim çözümlerle hayata geçiriyor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --c-dark: #0f0f0d;
+      --c-mid: #1c1b18;
+      --c-card: #242320;
+      --c-gold: #c8a04a;
+      --c-gold-light: #e8c06a;
+      --c-text: #f0ede6;
+      --c-muted: #8a8780;
+      --c-border: rgba(200,160,74,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--c-dark); color: var(--c-text); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 64px;
+      background: rgba(15,15,13,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-border);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: var(--c-gold);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+    .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--c-text); }
+    .logo-text span { color: var(--c-gold); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a { text-decoration: none; color: var(--c-muted); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    nav ul a:hover { color: var(--c-gold); }
+    .nav-cta {
+      background: var(--c-gold); color: var(--c-dark); border: none;
+      padding: 9px 20px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 13px;
+      letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--c-gold-light); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--c-text); transition: all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 90vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 5vw 6vw; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(to bottom, rgba(15,15,13,0.2) 0%, rgba(15,15,13,0.75) 60%, var(--c-dark) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,160,74,0.025) 40px, rgba(200,160,74,0.025) 41px);
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(200,160,74,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,160,74,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    }
+    .hero-building {
+      position: absolute; right: 6vw; bottom: 0; top: 0; z-index: 0;
+      display: flex; align-items: flex-end; pointer-events: none;
+    }
+    .building-svg { opacity: 0.1; }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 24px;
+    }
+    .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--c-gold); }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 110px);
+      line-height: 0.92; letter-spacing: 2px; margin-bottom: 28px;
+    }
+    h1 em { font-style: normal; color: var(--c-gold); }
+    .hero-desc { font-size: 17px; font-weight: 300; color: var(--c-muted); line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--c-gold); color: var(--c-dark); border: none;
+      padding: 14px 32px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--c-gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--c-text); border: 1px solid rgba(240,237,230,0.25);
+      padding: 14px 32px; font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 14px;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--c-gold); color: var(--c-gold); }
+
+    /* ── STATS ── */
+    .stats-bar {
+      display: flex; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
+      background: var(--c-mid); flex-wrap: wrap;
+    }
+    .stat-item { flex: 1; min-width: 140px; padding: 28px 32px; border-right: 1px solid var(--c-border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 46px; color: var(--c-gold); line-height: 1; }
+    .stat-label { font-size: 12px; font-weight: 400; color: var(--c-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 5vw; }
+    .section-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--c-gold); }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 64px); letter-spacing: 1px; margin-bottom: 24px; line-height: 1; }
+    h2 em { font-style: normal; color: var(--c-gold); }
+
+    /* ── HAKKIMIZDA ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-text p { font-size: 15px; font-weight: 300; color: var(--c-muted); line-height: 1.85; margin-bottom: 16px; }
+    .about-text p strong { color: var(--c-text); font-weight: 500; }
+    .about-visual {
+      position: relative; aspect-ratio: 4/3;
+      background: var(--c-card); border: 1px solid var(--c-border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .about-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(200,160,74,0.08) 0%, transparent 60%);
+    }
+    .about-pattern {
+      position: absolute; inset: 0; opacity: 0.08;
+      background-image:
+        linear-gradient(rgba(200,160,74,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,160,74,0.5) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .about-icon-wrap { position: relative; z-index: 1; text-align: center; }
+    .about-year { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--c-gold); opacity: 0.15; position: absolute; bottom: 8px; right: 16px; line-height: 1; }
+    .values { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 32px; background: var(--c-border); }
+    .value-item { background: var(--c-dark); padding: 20px 24px; }
+    .value-title { font-size: 13px; font-weight: 600; color: var(--c-text); margin-bottom: 4px; }
+    .value-desc { font-size: 12px; font-weight: 300; color: var(--c-muted); line-height: 1.6; }
+
+    /* ── HİZMETLER ── */
+    .services { background: var(--c-mid); }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--c-border); }
+    .service-card {
+      background: var(--c-card); padding: 36px 32px;
+      border-bottom: 3px solid transparent; transition: border-color 0.25s, background 0.25s;
+    }
+    .service-card:hover { background: #2a2924; border-bottom-color: var(--c-gold); }
+    .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--c-gold); letter-spacing: 2px; margin-bottom: 20px; }
+    .service-icon { margin-bottom: 16px; }
+    .service-title { font-size: 17px; font-weight: 600; color: var(--c-text); margin-bottom: 10px; }
+    .service-desc { font-size: 13px; font-weight: 300; color: var(--c-muted); line-height: 1.7; }
+
+    /* ── PROJELER ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .project-card {
+      aspect-ratio: 4/3; background: var(--c-card); border: 1px solid var(--c-border);
+      position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: flex-end;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { transform: scale(1.01); }
+    .project-card:first-child { grid-column: span 2; aspect-ratio: auto; min-height: 280px; }
+    .project-card:last-child { grid-column: span 2; }
+    .project-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,160,74,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,160,74,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      transition: transform 0.4s ease;
+    }
+    .project-card:hover .project-bg { transform: scale(1.05); }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,15,13,0.95) 0%, transparent 60%);
+    }
+    .project-info { position: relative; z-index: 1; padding: 24px; width: 100%; }
+    .project-cat { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--c-gold); margin-bottom: 6px; }
+    .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--c-text); }
+    .project-loc { font-size: 12px; color: var(--c-muted); margin-top: 4px; }
+    .project-emoji {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 80px; opacity: 0.07; pointer-events: none;
+    }
+
+    /* ── İLETİŞİM ── */
+    .contact { background: var(--c-mid); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start; }
+    .contact-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; margin-bottom: 32px; }
+    .contact-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .contact-dot { width: 8px; height: 8px; background: var(--c-gold); margin-top: 5px; flex-shrink: 0; }
+    .contact-row-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--c-gold); margin-bottom: 4px; }
+    .contact-row-val { font-size: 14px; color: var(--c-muted); line-height: 1.6; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--c-muted); margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: rgba(36,35,32,0.8); border: 1px solid var(--c-border);
+      color: var(--c-text); padding: 12px 16px; font-family: 'Outfit', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--c-gold); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%; background: var(--c-gold); color: var(--c-dark); border: none;
+      padding: 15px 32px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s;
+    }
+    .form-submit:hover { background: var(--c-gold-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 5vw; border-top: 1px solid var(--c-border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; }
+    .footer-logo span { color: var(--c-gold); }
+    footer p { font-size: 12px; color: var(--c-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav ul, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      nav ul.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--c-dark); padding: 24px 5vw; border-bottom: 1px solid var(--c-border); gap: 20px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .project-card:first-child, .project-card:last-child { grid-column: span 2; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 52px; }
+      .stats-bar { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--c-border); }
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card:first-child, .project-card:last-child { grid-column: span 1; }
+      .form-row { grid-template-columns: 1fr; }
+      .values { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon"></div>
+    <div class="logo-text">KARAATAY <span>İNŞAAT</span></div>
+  </a>
+  <ul id="nav-menu">
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#hizmetler">Hizmetler</a></li>
+    <li><a href="#projeler">Projeler</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('iletisim').scrollIntoView({behavior:'smooth'})">Teklif Al</button>
+  <button class="hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-building">
+    <svg class="building-svg" width="440" height="560" viewBox="0 0 440 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="110" y="80" width="220" height="480" fill="#c8a04a"/>
+      <rect x="130" y="100" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="186" y="100" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="242" y="100" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="298" y="100" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="130" y="168" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="186" y="168" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="242" y="168" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="298" y="168" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="130" y="236" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="186" y="236" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="242" y="236" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="298" y="236" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="130" y="304" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="186" y="304" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="242" y="304" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="298" y="304" width="36" height="48" fill="#0f0f0d"/>
+      <rect x="175" y="420" width="90" height="140" fill="#0f0f0d"/>
+      <rect x="60" y="210" width="50" height="350" fill="#c8a04a" opacity="0.5"/>
+      <rect x="330" y="160" width="60" height="400" fill="#c8a04a" opacity="0.35"/>
+      <rect x="24" y="310" width="36" height="250" fill="#c8a04a" opacity="0.25"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Bursa · Kuruluş 2004</div>
+    <h1>GÜÇLÜ<br>TEMELLER,<br><em>KALİCİ</em><br>YAPILAR</h1>
+    <p class="hero-desc">20 yılı aşkın deneyimle konut, ticari ve endüstriyel yapı projelerini anahtar teslim çözümlerle hayata geçiriyoruz.</p>
+    <div class="hero-btns">
+      <a href="#projeler" class="btn-primary">Projelerimizi Gör</a>
+      <a href="#iletisim" class="btn-outline">Bize Ulaşın</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">150+</div>
+    <div class="stat-label">Tamamlanan Proje</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">20</div>
+    <div class="stat-label">Yıllık Deneyim</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">48</div>
+    <div class="stat-label">Uzman Kadro</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8</div>
+    <div class="stat-label">İl Genelinde Faaliyet</div>
+  </div>
+</div>
+
+<!-- HAKKIMIZDA -->
+<section id="hakkimizda">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-tag">Hakkımızda</div>
+      <h2>20 YILLIK <em>TECRÜBE</em></h2>
+      <p><strong>Karaatay İnşaat</strong>, 2004 yılında Bursa'da kurulan, konut, ticari ve endüstriyel yapı alanlarında uzmanlaşmış bir inşaat firmasıdır.</p>
+      <p>Müşteri memnuniyetini ön planda tutarak her projede <strong>kalite, güvenlik ve zamanında teslimat</strong> ilkesinden taviz vermiyoruz. Deneyimli mühendis ve usta kadromuzla her ölçekte projeye hazırız.</p>
+      <div class="values">
+        <div class="value-item">
+          <div class="value-title">Kalite Güvencesi</div>
+          <div class="value-desc">TSE ve ISO standartlarına uygun malzeme ve işçilik</div>
+        </div>
+        <div class="value-item">
+          <div class="value-title">Zamanında Teslimat</div>
+          <div class="value-desc">%96 teslim oranı ile belirlenen takvime sadakat</div>
+        </div>
+        <div class="value-item">
+          <div class="value-title">Şeffaf Fiyatlandırma</div>
+          <div class="value-desc">Sürpriz maliyet olmadan net bütçe yönetimi</div>
+        </div>
+        <div class="value-item">
+          <div class="value-title">Satış Sonrası Destek</div>
+          <div class="value-desc">Teslim sonrası 2 yıl ücretsiz bakım garantisi</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-pattern"></div>
+      <div class="about-icon-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <path d="M50 10 L80 30 L80 70 L50 90 L20 70 L20 30 Z" stroke="#c8a04a" stroke-width="1.5" fill="none"/>
+          <path d="M50 25 L65 35 L65 65 L50 75 L35 65 L35 35 Z" stroke="#c8a04a" stroke-width="1" fill="rgba(200,160,74,0.06)"/>
+          <line x1="50" y1="10" x2="50" y2="90" stroke="#c8a04a" stroke-width="0.5" opacity="0.3"/>
+          <line x1="20" y1="30" x2="80" y2="30" stroke="#c8a04a" stroke-width="0.5" opacity="0.3"/>
+          <line x1="20" y1="70" x2="80" y2="70" stroke="#c8a04a" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="about-year">2004</div>
+    </div>
+  </div>
+</section>
+
+<!-- HİZMETLER -->
+<section id="hizmetler" class="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag">Hizmetler</div>
+      <h2>NE <em>YAPIYORUZ?</em></h2>
+    </div>
+    <a href="#iletisim" class="btn-outline">Teklif İste</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="12" width="24" height="16" stroke="#c8a04a" stroke-width="1.2"/>
+          <path d="M4 12 L16 4 L28 12" stroke="#c8a04a" stroke-width="1.2"/>
+          <rect x="13" y="18" width="6" height="10" stroke="#c8a04a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="service-title">Konut İnşaatı</div>
+      <div class="service-desc">Villa, apartman ve toplu konut projelerinde anahtar teslim çözümler. Proje tasarımından iskan ruhsatına kadar tüm süreç yönetimi.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="8" width="24" height="20" stroke="#c8a04a" stroke-width="1.2"/>
+          <rect x="8" y="12" width="6" height="6" stroke="#c8a04a" stroke-width="1"/>
+          <rect x="18" y="12" width="6" height="6" stroke="#c8a04a" stroke-width="1"/>
+          <rect x="11" y="22" width="10" height="6" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="4" y1="8" x2="28" y2="8" stroke="#c8a04a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-title">Ticari Yapılar</div>
+      <div class="service-desc">Ofis, AVM, otel ve endüstriyel tesis inşaatları. Kurumsal yapı gereksinimlerine özel teknik çözümler.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="6" y="16" width="20" height="12" stroke="#c8a04a" stroke-width="1.2"/>
+          <path d="M10 16 L10 10 L22 10 L22 16" stroke="#c8a04a" stroke-width="1.2"/>
+          <line x1="4" y1="28" x2="28" y2="28" stroke="#c8a04a" stroke-width="1.5"/>
+          <line x1="16" y1="10" x2="16" y2="4" stroke="#c8a04a" stroke-width="1"/>
+          <circle cx="16" cy="4" r="2" stroke="#c8a04a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="service-title">Endüstriyel Tesisler</div>
+      <div class="service-desc">Fabrika, depo ve lojistik merkezlerin projelendirme ve inşaat süreçlerinde tam kapsamlı hizmet.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="14" r="8" stroke="#c8a04a" stroke-width="1.2"/>
+          <line x1="16" y1="6" x2="16" y2="4" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="16" y1="22" x2="16" y2="24" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="8" y1="14" x2="6" y2="14" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="24" y1="14" x2="26" y2="14" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="8" y1="28" x2="24" y2="28" stroke="#c8a04a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-title">Restorasyon</div>
+      <div class="service-desc">Tarihi yapılar ve mevcut binaların restorasyon, güçlendirme ve yenileme çalışmaları.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M6 26 L6 10 L14 6 L22 10 L22 26" stroke="#c8a04a" stroke-width="1.2" fill="none"/>
+          <line x1="6" y1="26" x2="28" y2="26" stroke="#c8a04a" stroke-width="1.2"/>
+          <line x1="22" y1="20" x2="28" y2="20" stroke="#c8a04a" stroke-width="1"/>
+          <line x1="28" y1="20" x2="28" y2="26" stroke="#c8a04a" stroke-width="1"/>
+          <rect x="10" y="16" width="8" height="10" stroke="#c8a04a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="service-title">Peyzaj & Dış Cephe</div>
+      <div class="service-desc">Yapı tamamlayıcı dış cephe kaplama, çevre düzenlemesi ve peyzaj tasarımı hizmetleri.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="4" width="24" height="24" stroke="#c8a04a" stroke-width="1.2"/>
+          <line x1="4" y1="12" x2="28" y2="12" stroke="#c8a04a" stroke-width="0.8"/>
+          <line x1="4" y1="20" x2="28" y2="20" stroke="#c8a04a" stroke-width="0.8"/>
+          <line x1="12" y1="4" x2="12" y2="28" stroke="#c8a04a" stroke-width="0.8"/>
+          <line x1="20" y1="4" x2="20" y2="28" stroke="#c8a04a" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <div class="service-title">Proje Yönetimi</div>
+      <div class="service-desc">Yapım süreçlerinin planlama, takip ve raporlama hizmetleri. Maliyet ve süre kontrolü.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJELER -->
+<section id="projeler">
+  <div class="section-tag">Referanslar</div>
+  <h2 style="margin-bottom:40px">SEÇİLMİŞ <em>PROJELERİMİZ</em></h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-bg"></div>
+      <div class="project-emoji">🏢</div>
+      <div class="project-overlay"></div>
+      <div class="project-info">
+        <div class="project-cat">Konut · 2023</div>
+        <div class="project-title">KARAATAY PARK KONUTLARI</div>
+        <div class="project-loc">Nilüfer, Bursa — 180 Daire</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(200,160,74,0.04) 20px, rgba(200,160,74,0.04) 21px);"></div>
+      <div class="project-emoji">🏭</div>
+      <div class="project-overlay"></div>
+      <div class="project-info">
+        <div class="project-cat">Endüstriyel · 2022</div>
+        <div class="project-title">TEKSTİL FABRİKASI</div>
+        <div class="project-loc">Organize Sanayi, Bursa</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg"></div>
+      <div class="project-emoji">🏨</div>
+      <div class="project-overlay"></div>
+      <div class="project-info">
+        <div class="project-cat">Ticari · 2021</div>
+        <div class="project-title">CENTRAL OTEL</div>
+        <div class="project-loc">Osmangazi, Bursa — 5 Katlı</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg"></div>
+      <div class="project-emoji">🏫</div>
+      <div class="project-overlay"></div>
+      <div class="project-info">
+        <div class="project-cat">Kamu · 2020</div>
+        <div class="project-title">MUDANYA EĞİTİM KOMPLEKSİ</div>
+        <div class="project-loc">Mudanya, Bursa — Okul + Spor Salonu + Kafeterya</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg"></div>
+      <div class="project-emoji">🏗️</div>
+      <div class="project-overlay"></div>
+      <div class="project-info">
+        <div class="project-cat">Konut · 2019</div>
+        <div class="project-title">GÜRSU VİLLA PROJESİ</div>
+        <div class="project-loc">Gürsu, Bursa — 24 Villa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+<section id="iletisim" class="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-tag">İletişim</div>
+      <h3>BİZİMLE<br>ÇALIŞALIM</h3>
+      <div class="contact-row">
+        <div class="contact-dot"></div>
+        <div>
+          <div class="contact-row-label">Adres</div>
+          <div class="contact-row-val">Organize Sanayi Bölgesi,<br>Nil Caddesi No:42<br>Nilüfer / Bursa</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-dot"></div>
+        <div>
+          <div class="contact-row-label">Telefon</div>
+          <div class="contact-row-val">+90 224 000 00 00</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-dot"></div>
+        <div>
+          <div class="contact-row-label">E-posta</div>
+          <div class="contact-row-val">info@karaatayinsaat.com.tr</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-dot"></div>
+        <div>
+          <div class="contact-row-label">Çalışma Saatleri</div>
+          <div class="contact-row-val">Pazartesi – Cuma: 08:00 – 18:00<br>Cumartesi: 09:00 – 14:00</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ad Soyad</label>
+          <input type="text" placeholder="Ahmet Yılmaz">
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" placeholder="+90 5xx xxx xx xx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-posta</label>
+        <input type="email" placeholder="ornek@mail.com">
+      </div>
+      <div class="form-group">
+        <label>Proje Tipi</label>
+        <select>
+          <option>Konut İnşaatı</option>
+          <option>Ticari Yapı</option>
+          <option>Endüstriyel Tesis</option>
+          <option>Restorasyon</option>
+          <option>Diğer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mesajınız</label>
+        <textarea placeholder="Projeniz hakkında kısaca bilgi verin..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Mesajınız alındı! En kısa sürede dönüş yapacağız.')">Mesaj Gönder →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KARAATAY <span>İNŞAAT</span></div>
+  <p>© 2024 Karaatay İnşaat. Tüm hakları saklıdır.</p>
+  <p style="font-size:11px;color:#5f5e5a;">Bursa · Türkiye</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('nav-menu');
+  hamburger.addEventListener('click', () => {
+    menu.classList.toggle('open');
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => menu.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
